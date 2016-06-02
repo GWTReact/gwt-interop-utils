@@ -4,6 +4,10 @@
 *.jar
 *.war
 
+# Gradle stuff
+.gradle/
+build/
+
 # gwt caches and compiled units #
 war/gwt_bree/
 gwt-unitCache/
