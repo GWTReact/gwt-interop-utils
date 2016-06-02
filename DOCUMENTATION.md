@@ -7,7 +7,9 @@
     * 2.3 Merging objects
     * 2.4 Removing properties from objects
 3. Shared JSON compatible data structures
-    * 3.1 Defining client/server shared type factory methods
+    * 3.1 JSON encoding/decoding
+    3.2 Standard Java Collection Integration
+    * 3.3 Defining client/server shared type factory methods
 4. Common Functional Interfaces
 5. JSON utilities 
 6. Low level Javascript utilities
@@ -215,6 +217,8 @@ public class CommonDataObject2 {
 }
 ```
 
+#### 3.1 JSON encoding/decoding
+
 Given the above class, if you were to write the following on the client :
 
 ```java
@@ -253,10 +257,14 @@ the exact same object literal.
     CommonDataObject example = JSON.parse(jsonData);
 ```
 
-The exact same CommonDataObject class can be used on the server and all the methods would work as they do on
+The exact same <code>CommonDataObject</code> class can be used on the server and all the methods would work as they do on
 the client. On the server, the <code>Array.create()</code> method would instantiate the JavaArray 
 emulation class instead of a native javascript Array. Calling <code>StringMap.create()</code> instantiates
-the JavaStringMap emulation class.
+the JavaStringMap emulation class. <code>StringMap.create()</code>
+
+#### 3.2 Standard Java Collection Integration
+
+You can use an instance of Array much like you would any other Java collection, both on the client and server e.g.
 
 ```java
         Array<String> a1 = Array.create();
@@ -272,8 +280,9 @@ the JavaStringMap emulation class.
         a1.stream().forEach(test::append);
 ```
 
+PLEASE NOTE: streams will be supported once emulation lands in GWT 2.8
 
-#### 3.1 Defining client/server factory methods
+#### 3.3 Defining client/server factory methods
 
 TODO
 

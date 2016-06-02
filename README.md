@@ -10,6 +10,7 @@ Check out the [Documentation](https://github.com/GWTReact/gwt-interop-utils/blob
 ##Roadmap
 
 * Add support for shared date and timestamp values
+* Add support for shared boolean value objects
 
 ##Contributing
 
