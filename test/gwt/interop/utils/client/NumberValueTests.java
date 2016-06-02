@@ -3,7 +3,7 @@ package gwt.interop.utils.client;
 import com.google.gwt.junit.client.GWTTestCase;
 import gwt.interop.utils.shared.JsHelper;
 import gwt.interop.utils.shared.SharedDataTypesFactory;
-import gwt.interop.utils.shared.collections.ClientServerCommonNumberValueTests;
+import gwt.interop.utils.shared.valuetypes.ClientServerCommonNumberValueTests;
 
 public class NumberValueTests extends GWTTestCase {
 

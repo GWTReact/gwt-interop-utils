@@ -75,7 +75,7 @@ public class ObjectLiteralTests extends GWTTestCase {
         assertEquals(commonObj.aMap.get("v1"), "A Map Value 1");
         assertEquals(commonObj.anArray.get(1), "ArrayValue2");
 
-        //Currently crashes the compiler
+        //Currently crashes, compiler issue (being fixed)
         //assertEquals(commonObj.convolutedSharedMethod("v2"), "ddd");
     }
 }

@@ -1,6 +1,4 @@
-package gwt.interop.utils.shared.collections;
-
-import gwt.interop.utils.shared.valuetypes.NumberValue;
+package gwt.interop.utils.shared.valuetypes;
 
 public class ClientServerCommonNumberValueTests {
     public static void run() {

@@ -2,7 +2,7 @@ package gwt.interop.utils.server;
 
 import gwt.interop.utils.server.valuetypes.JavaNumberValue;
 import gwt.interop.utils.shared.SharedDataTypesFactory;
-import gwt.interop.utils.shared.collections.ClientServerCommonNumberValueTests;
+import gwt.interop.utils.shared.valuetypes.ClientServerCommonNumberValueTests;
 
 public class NumberValueTests {
 
