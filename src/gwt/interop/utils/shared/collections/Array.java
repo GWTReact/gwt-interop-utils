@@ -25,6 +25,8 @@ import gwt.interop.utils.shared.SharedDataTypesFactory;
 import gwt.interop.utils.shared.JsHelper;
 import jsinterop.annotations.*;
 
+import java.util.NoSuchElementException;
+
 /**
  * An interface to a Javascript array. The implementation may be different on the client
  * and server
@@ -116,14 +118,17 @@ public interface Array<T> {
     /**
      * Sets the object value at a given index.
      * <p>
-     * If the index is out of bounds, the value will still be set. The array's
-     * length will be updated to encompass the bounds implied by the added object.
+     * Unlike the native Javascript Array, if the index is out of bounds a NoSuchElementException
+     * will be thrown. This decision was made to simplify emulation
      *
      * @param index the index to be set
      * @param value the object to be stored
      */
     @JsOverlay
     default void set(int index, T value) {
+        if (index >= getLength())
+            throw new NoSuchElementException();
+
         JsHelper.setArrayValue(this, index, value);
     }
 
@@ -454,7 +459,7 @@ public interface Array<T> {
     /* Enable once stream support lands in GWT 2.8
     @JsOverlay
     public default Stream<T> stream() {
-        throw new UnsupportedOperationException("stream is only supported on the server");
+       //TODO
     }
     */
 }

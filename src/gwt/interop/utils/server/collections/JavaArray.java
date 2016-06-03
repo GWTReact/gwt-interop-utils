@@ -1,13 +1,11 @@
 package gwt.interop.utils.server.collections;
 
 import gwt.interop.utils.shared.collections.Array;
-import jsinterop.annotations.JsOverlay;
 
 import java.util.*;
-import java.util.function.Consumer;
 import java.util.stream.Stream;
 
-public class JavaArray<T> implements Array<T>, Iterable<T> {
+public class JavaArray<T> implements Array<T> {
     private ArrayList<T> internalArray;
 
     public JavaArray() {
@@ -156,7 +154,7 @@ public class JavaArray<T> implements Array<T>, Iterable<T> {
                 index++;
             }
         }else {
-            throw new RuntimeException("Not supported");
+            throw new UnsupportedOperationException();
         }
 
         if (toAdd != null) {
@@ -378,19 +376,7 @@ public class JavaArray<T> implements Array<T>, Iterable<T> {
         return internalArray;
     }
 
-        /* Enable once stream support lands in GWT 2.8
     public Stream<T> stream() {
         return internalArray.stream();
-    }
-    */
-
-    @Override
-    public Iterator<T> iterator() {
-        return internalArray.iterator();
-    }
-
-    @Override
-    public void forEach(Consumer<? super T> action) {
-        internalArray.forEach(action);
     }
 }

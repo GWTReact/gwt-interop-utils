@@ -21,6 +21,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE. */
 
+import com.google.gwt.core.client.JavaScriptObject;
 import gwt.interop.utils.shared.collections.Array;
 import gwt.interop.utils.shared.valuetypes.NumberValue;
 
@@ -87,17 +88,6 @@ public class JsHelper {
         o[p] = v;
     }-*/;
 
-    /**
-     * Set the Array value at the supplied index
-     *
-     * @param a
-     * @param i
-     * @param v
-     * @param <T>
-     */
-    public static native <T> void setArrayValue(Array a, int i, T v) /*-{
-        a[i] = v;
-    }-*/;
 
     public static native <O> int getObjectIntProperty(O o, String p) /*-{
         return o[p];
@@ -119,16 +109,16 @@ public class JsHelper {
         return o[p];
     }-*/;
 
-    public static native <T> T getArrayValue(Array array, int index) /*-{
-        return array[index];
-    }-*/;
-
     public static native void removeProperty(Object o, String p) /*-{
         delete o[p];
     }-*/;
 
     public static native boolean hasProperty(Object o, String p) /*-{
         return o[p] !== undefined;
+    }-*/;
+
+    public static native boolean propertyIsFunction(Object o, String p) /*-{
+        return o[p] !== undefined && typeof o[p] == 'function';
     }-*/;
 
     public static native Array<String> objectProperties(Object o) /*-{
@@ -149,6 +139,22 @@ public class JsHelper {
             }
         }
         return o;
+    }-*/;
+
+    /**
+     * Set the Array value at the supplied index
+     *
+     * @param a
+     * @param i
+     * @param v
+     * @param <T>
+     */
+    public static native <T> void setArrayValue(Array a, int i, T v) /*-{
+        a[i] = v;
+    }-*/;
+
+    public static native <T> T getArrayValue(Array a, int i) /*-{
+        return a[i];
     }-*/;
 
     public static native void applyPolyfills() /*-{
@@ -197,10 +203,6 @@ public class JsHelper {
         return out;
     }-*/;
 
-    public static native NumberValue createNumber(int i)/*-{
-        return new Number(i);
-    }-*/;
-
     public static native NumberValue createNumber(double d) /*-{
         return new Number(d);
     }-*/;
@@ -209,7 +211,7 @@ public class JsHelper {
         return n;
     }-*/;
 
-    public static native int castAsInt(NumberValue n) /*-{
-        return n;
+    public native JavaScriptObject getGlobalObject() /*-{
+        return $wnd;
     }-*/;
 }

@@ -36,27 +36,13 @@ import jsinterop.annotations.JsType;
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Number")
 public interface NumberValue {
     @JsOverlay
-    default double asDouble() {
-        return JsHelper.castAsDouble(this);
-    }
+    default double asDouble() { return JsHelper.castAsDouble(this); }
 
     @JsOverlay
-    default Double asDoubleObj() {
-        return Double.valueOf(JsHelper.castAsDouble(this));
-    }
+    default int asInt() { return (int)JsHelper.castAsDouble(this); }
 
     @JsOverlay
-    default int asInt() {
-        return JsHelper.castAsInt(this);
-    }
-
-    @JsOverlay
-   default Integer asInteger() {
-       return Integer.valueOf(JsHelper.castAsInt(this));
-   }
-
-    @JsOverlay
-    default Long asLong() {
+    default long asLong() {
         return (long)JsHelper.castAsDouble(this);
     }
 
@@ -75,7 +61,7 @@ public interface NumberValue {
 
         //Only support long values we can safely store as a double i.e. must be greater than -(2 power 52)
         if (l < -4503599627370496L)
-            throw new IllegalArgumentException("Number too large to store as javascript Number");
+            throw new IllegalArgumentException("Number too large to store as Javascript Number");
 
         return SharedDataTypesFactory.createNumberValue((double)l);
     }

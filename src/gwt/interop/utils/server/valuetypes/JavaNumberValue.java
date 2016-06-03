@@ -14,19 +14,11 @@ public class JavaNumberValue implements NumberValue {
         return v;
     }
 
-    public Double asDoubleObj() {
-        return Double.valueOf(v);
-    }
-
     public int asInt() {
         return (int)v;
     }
 
-    public Integer asInteger() {
-        return Integer.valueOf((int)v);
-    }
-
-    public Long asLong() {
+    public long asLong() {
         return (long)v;
     }
 
@@ -34,10 +26,7 @@ public class JavaNumberValue implements NumberValue {
         return SharedDataTypesFactory.createNumberValue(i);
     }
 
-    public static NumberValue from(double d) {
-
-        return SharedDataTypesFactory.createNumberValue(d);
-    }
+    public static NumberValue from(double d) { return SharedDataTypesFactory.createNumberValue(d); }
 
     public static NumberValue from(long l) {
 

@@ -4,7 +4,6 @@ package gwt.interop.utils.shared;
 import gwt.interop.utils.shared.collections.Array;
 import gwt.interop.utils.shared.collections.StringMap;
 import gwt.interop.utils.shared.valuetypes.NumberValue;
-import jsinterop.annotations.JsType;
 
 public class SharedDataTypesFactory {
 

@@ -1,16 +1,14 @@
 package gwt.interop.utils.server.collections;
 
 import gwt.interop.utils.shared.collections.Array;
-import jsinterop.annotations.JsOverlay;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.function.Consumer;
 import java.util.stream.Stream;
 
-public class JavaLinkedArray<T> implements Array<T>, Iterable<T> {
+public class JavaLinkedArray<T> implements Array<T> {
     private LinkedList<T> internalArray;
 
     public JavaLinkedArray() {
@@ -393,19 +391,7 @@ public class JavaLinkedArray<T> implements Array<T>, Iterable<T> {
         return internalArray;
     }
 
-    /* Enable once stream support lands in GWT 2.8
     public Stream<T> stream() {
         return internalArray.stream();
-    }
-    */
-
-    @Override
-    public Iterator<T> iterator() {
-        return internalArray.iterator();
-    }
-
-    @Override
-    public void forEach(Consumer<? super T> action) {
-        internalArray.forEach(action);
     }
 }
