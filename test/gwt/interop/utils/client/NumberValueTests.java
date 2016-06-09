@@ -2,7 +2,7 @@ package gwt.interop.utils.client;
 
 import com.google.gwt.junit.client.GWTTestCase;
 import gwt.interop.utils.shared.JsHelper;
-import gwt.interop.utils.shared.SharedDataTypesFactory;
+import gwt.interop.utils.shared.valuetypes.NumericValueFactory;
 import gwt.interop.utils.shared.valuetypes.ClientServerCommonNumberValueTests;
 
 public class NumberValueTests extends GWTTestCase {
@@ -12,7 +12,7 @@ public class NumberValueTests extends GWTTestCase {
     }
 
     public void testNumbers() {
-        SharedDataTypesFactory.setNumberValueConstructor(JsHelper::createNumber);
+        NumericValueFactory.setConstructor(JsHelper::createNumber);
 
         ClientServerCommonNumberValueTests.run();
     }

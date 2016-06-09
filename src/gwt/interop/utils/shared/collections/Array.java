@@ -21,7 +21,6 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE. */
 
-import gwt.interop.utils.shared.SharedDataTypesFactory;
 import gwt.interop.utils.shared.JsHelper;
 import jsinterop.annotations.*;
 
@@ -392,7 +391,7 @@ public interface Array<T> {
 
     @JsOverlay
     static <T> Array<T> create() {
-        return SharedDataTypesFactory.createArray();
+        return ArrayFactory.createArray();
     }
 
     /* Functional interfaces */

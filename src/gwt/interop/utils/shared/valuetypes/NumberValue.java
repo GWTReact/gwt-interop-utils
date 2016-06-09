@@ -22,7 +22,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE. */
 
 import gwt.interop.utils.shared.JsHelper;
-import gwt.interop.utils.shared.SharedDataTypesFactory;
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
@@ -48,12 +47,12 @@ public interface NumberValue {
 
     @JsOverlay
     static NumberValue from(int i) {
-        return SharedDataTypesFactory.createNumberValue(i);
+        return NumericValueFactory.createNumberValue(i);
     }
 
     @JsOverlay
     static NumberValue from(double d) {
-        return SharedDataTypesFactory.createNumberValue(d);
+        return NumericValueFactory.createNumberValue(d);
     }
 
     @JsOverlay
@@ -63,6 +62,6 @@ public interface NumberValue {
         if (l < -4503599627370496L)
             throw new IllegalArgumentException("Number too large to store as Javascript Number");
 
-        return SharedDataTypesFactory.createNumberValue((double)l);
+        return NumericValueFactory.createNumberValue((double)l);
     }
 }

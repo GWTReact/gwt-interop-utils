@@ -21,7 +21,6 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE. */
 
-import gwt.interop.utils.shared.SharedDataTypesFactory;
 import gwt.interop.utils.shared.JsHelper;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsOverlay;
@@ -136,7 +135,7 @@ public interface StringMap<T> {
      * @return The new instance
      */
     @JsOverlay static <T> StringMap<T> create() {
-        return SharedDataTypesFactory.createMap();
+        return StringMapFactory.createMap();
     }
 
     /**

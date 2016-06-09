@@ -1,6 +1,6 @@
 package gwt.interop.utils.server.valuetypes;
 
-import gwt.interop.utils.shared.SharedDataTypesFactory;
+import gwt.interop.utils.shared.valuetypes.NumericValueFactory;
 import gwt.interop.utils.shared.valuetypes.NumberValue;
 
 public class JavaNumberValue implements NumberValue {
@@ -23,10 +23,10 @@ public class JavaNumberValue implements NumberValue {
     }
 
     public static NumberValue from(int i) {
-        return SharedDataTypesFactory.createNumberValue(i);
+        return NumericValueFactory.createNumberValue(i);
     }
 
-    public static NumberValue from(double d) { return SharedDataTypesFactory.createNumberValue(d); }
+    public static NumberValue from(double d) { return NumericValueFactory.createNumberValue(d); }
 
     public static NumberValue from(long l) {
 
@@ -34,6 +34,6 @@ public class JavaNumberValue implements NumberValue {
         if (l < -4503599627370496L)
             throw new IllegalArgumentException("Number too large to store as javascript Number");
 
-        return SharedDataTypesFactory.createNumberValue(l);
+        return NumericValueFactory.createNumberValue(l);
     }
 }

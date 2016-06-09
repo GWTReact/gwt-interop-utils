@@ -3,34 +3,37 @@ package gwt.interop.utils.client;
 import com.google.gwt.junit.client.GWTTestCase;
 import gwt.interop.utils.client.collections.JsArray;
 import gwt.interop.utils.client.collections.JsStringMap;
-import gwt.interop.utils.client.objectliterals.ObjLiteral;
-import gwt.interop.utils.shared.SharedDataTypesFactory;
-import gwt.interop.utils.shared.objectliterals.CommonDataObject;
+import gwt.interop.utils.client.plainobjects.JsPlainObj;
+import gwt.interop.utils.shared.JsHelper;
+import gwt.interop.utils.shared.collections.ArrayFactory;
+import gwt.interop.utils.shared.collections.StringMapFactory;
+import gwt.interop.utils.shared.plainobjects.CommonDataObject;
+import gwt.interop.utils.shared.valuetypes.NumericValueFactory;
 
-import static gwt.interop.utils.client.objectliterals.ObjLiteral.$;
-import static gwt.interop.utils.client.objectliterals.ObjLiteral.$literal;
+import static gwt.interop.utils.client.plainobjects.JsPlainObj.$;
+import static gwt.interop.utils.client.plainobjects.JsPlainObj.$jsPlainObj;
 
 
-public class ObjectLiteralTests extends GWTTestCase {
+public class PlainObjectTests extends GWTTestCase {
 
     @Override
     public String getModuleName() {
         return "gwt.interop.utils.InteropUtils";
     }
 
-    public void testInitLiteral() {
-        ObjLiteral o1 = $literal("a", 1, "b", 10, "c", 20);
+    public void testInitPlainObject() {
+        JsPlainObj o1 = $jsPlainObj("a", 1, "b", 10, "c", 20);
         assertEquals(o1.toJSONString(), "{\"a\":1,\"b\":10,\"c\":20}");
     }
 
-    public void testInitLiteralWithSuppliedObject() {
-        ObjLiteral o1 = $(new ObjLiteral(), "a", 2, "b", 20, "c", 30);
+    public void testInitPlainObjectWithSuppliedObject() {
+        JsPlainObj o1 = $(new JsPlainObj(), "a", 2, "b", 20, "c", 30);
 
         assertEquals(o1.toJSONString(), "{\"a\":2,\"b\":20,\"c\":30}");
     }
 
-    public void testConstructLiteral() {
-        ObjLiteral o2 = new ObjLiteral();
+    public void testConstructPlainObject() {
+        JsPlainObj o2 = new JsPlainObj();
         o2.set("b", 2);
         o2.set("d", 3);
 
@@ -38,23 +41,24 @@ public class ObjectLiteralTests extends GWTTestCase {
     }
 
     public void testMerge() {
-        ObjLiteral o1 = $literal("a", 1, "b", 10, "c", 20);
-        ObjLiteral o2 = $literal("b", 2, "d", 3);
-        ObjLiteral o3 = o1.merge(o2);
+        JsPlainObj o1 = $jsPlainObj("a", 1, "b", 10, "c", 20);
+        JsPlainObj o2 = $jsPlainObj("b", 2, "d", 3);
+        JsPlainObj o3 = o1.merge(o2);
 
         assertEquals(o3.toJSONString(), "{\"a\":1,\"b\":2,\"c\":20,\"d\":3}");
     }
 
     public void testExcept() {
-        ObjLiteral o1 = $literal("a", 1, "b", 10, "c", 20);
+        JsPlainObj o1 = $jsPlainObj("a", 1, "b", 10, "c", 20);
 
-        ObjLiteral o2 = o1.except("a","c");
+        JsPlainObj o2 = o1.except("a","c");
         assertEquals(o2.toJSONString(), "{\"b\":10}");
     }
 
-    public void testComplexLiteralToJson() {
-        SharedDataTypesFactory.setMapConstructor(JsStringMap::create);
-        SharedDataTypesFactory.setArrayConstructor(JsArray::create);
+    public void testComplexPlainObjectToJson() {
+        StringMapFactory.setConstructor(JsStringMap::create);
+        ArrayFactory.setConstructor(JsArray::create);
+        NumericValueFactory.setConstructor(JsHelper::createNumber);
 
         CommonDataObject commonObj = CommonDataObject.create();
         String json = JSON.stringify(commonObj);
@@ -62,9 +66,9 @@ public class ObjectLiteralTests extends GWTTestCase {
         assertEquals(json, "{\"intVal\":10,\"doubleVal\":20.2,\"booleanVal\":true,\"stringVal\":\"A String Value\",\"numberVal\":10,\"anArray\":[\"ArrayValue1\",\"ArrayValue2\",\"ArrayValue3\"],\"aMap\":{\"v1\":\"A Map Value 1\",\"v2\":\"A Map Value 2\"},\"embeddedObj\":{\"field1\":\"An embbeded object\"}}");
     }
 
-    public void testComplexLiteralFromJson() {
-        SharedDataTypesFactory.setMapConstructor(JsStringMap::create);
-        SharedDataTypesFactory.setArrayConstructor(JsArray::create);
+    public void testComplexPlainObjectFromJson() {
+        StringMapFactory.setConstructor(JsStringMap::create);
+        ArrayFactory.setConstructor(JsArray::create);
 
         CommonDataObject commonObj = JSON.parse("{\"intVal\":10,\"doubleVal\":20.2,\"booleanVal\":true,\"stringVal\":\"A String Value\",\"numberVal\":10,\"anArray\":[\"ArrayValue1\",\"ArrayValue2\",\"ArrayValue3\"],\"aMap\":{\"v1\":\"A Map Value 1\",\"v2\":\"A Map Value 2\"},\"embeddedObj\":{\"field1\":\"An embbeded object\"}}");
         assertEquals(commonObj.intVal, 10);
