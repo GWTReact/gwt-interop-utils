@@ -1,4 +1,4 @@
-package gwt.interop.utils.client.objectliterals;
+package gwt.interop.utils.client.plainobjects;
 /* The MIT License (MIT)
 
 Copyright (c) 2016 GWT React
@@ -28,28 +28,30 @@ import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
 /**
- * This class represents a Javascript Object literal e.g. var a = {}.
+ * This class represents a Plain Javascript Object i.e An object that
+ * was created by calling new Object(). Typically in javascript they
+ * are created as object literals using initializers e.g. var a = {prop: 10}
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name="Object")
-public class ObjLiteral {
+public class JsPlainObj {
 
     /**
-     * Initialize an object literal with the specified property values. For example,
-     * $literal("a",1, "b","somevalue) is eqivalent to the following javascript
-     * object literal { a: 1, b: "somevalue" }
+     * Initialize a plain object with the specified property values. For example,
+     * $jsPlainObj("a",1, "b","somevalue) is eqivalent to the following javascript
+     *  { a: 1, b: "somevalue" }
      */
     @JsOverlay
-    public static ObjLiteral $literal(Object ...fieldValues) {
-        return $(new ObjLiteral(), fieldValues);
+    public static JsPlainObj $jsPlainObj(Object ...fieldValues) {
+        return $(new JsPlainObj(), fieldValues);
     }
 
     /**
-     * Initialize a specified object literal with the specified property values. For example,
-     * $(new MyObjLiteral(), "a",1, "b","somevalue) is eqivalent to the following javascript
-     * object literal { a: 1, b: "somevalue" }
+     * Initialize a specified plain object with the specified property values. For example,
+     * $(new MyJsPlainObj(), "a",1, "b","somevalue) is eqivalent to the following javascript
+     *  { a: 1, b: "somevalue" }
      */
     @JsOverlay
-    public static <O> O $(O literal, Object ...fieldValues) {
+    public static <O> O $(O jsPlainObj, Object ...fieldValues) {
         String fieldName = null;
 
         for(Object f : fieldValues) {
@@ -57,25 +59,25 @@ public class ObjLiteral {
                 fieldName = (String)f;
             else {
                 if (f instanceof String)
-                    JsHelper.setObjectProperty(literal, fieldName, f);
+                    JsHelper.setObjectProperty(jsPlainObj, fieldName, f);
                 else if (f instanceof Integer)
-                    JsHelper.setObjectProperty(literal, fieldName, ((Integer) f).intValue());
+                    JsHelper.setObjectProperty(jsPlainObj, fieldName, ((Integer) f).intValue());
                 else if (f instanceof Double)
-                    JsHelper.setObjectProperty(literal, fieldName, ((Double) f).doubleValue());
+                    JsHelper.setObjectProperty(jsPlainObj, fieldName, ((Double) f).doubleValue());
                 else if (f instanceof Boolean)
-                    JsHelper.setObjectProperty(literal, fieldName, ((Boolean) f).booleanValue());
+                    JsHelper.setObjectProperty(jsPlainObj, fieldName, ((Boolean) f).booleanValue());
                 else
-                    JsHelper.setObjectProperty(literal, fieldName, f);
+                    JsHelper.setObjectProperty(jsPlainObj, fieldName, f);
 
                 fieldName = null;
             }
         }
 
-        return literal;
+        return jsPlainObj;
     }
 
     /**
-     * Return an int parameter from an object literal. NOTE this is method is NOT type safe. If if you access
+     * Return an int parameter from this plain object. NOTE this is method is NOT type safe. If if you access
      * a property that isn't an int you will get an undefined result. Also if you access a property
      * that does not exist you will get an undefined error
      *
@@ -88,7 +90,7 @@ public class ObjLiteral {
     }
 
     /**
-     * Return an double parameter from an object literal. NOTE this is method is NOT type safe. If you access
+     * Return a double parameter from this plain object. NOTE this method is NOT type safe. If you access
      * a property that isn't a double you will get an undefined result. Also if you access a property
      * that does not exist you will get an undefined error
      *
@@ -101,7 +103,7 @@ public class ObjLiteral {
     }
 
     /**
-     * Return an boolean parameter from an object literal. NOTE this is method is NOT type safe. If you access
+     * Return an boolean parameter from this plain object. NOTE this method is NOT type safe. If you access
      * a property that isn't a boolean you will get an undefined result. Also if you access a property
      * that does not exist you will get an undefined error
      *
@@ -114,7 +116,7 @@ public class ObjLiteral {
     }
 
     /**
-     * Return an String parameter from an object literal. NOTE this is method is NOT type safe. If you access
+     * Return an String parameter from this plain object. NOTE this method is NOT type safe. If you access
      * a property that isn't an String you will get an undefined result. Also if you access a property
      * that does not exist you will get an undefined error
      *
@@ -127,7 +129,7 @@ public class ObjLiteral {
     }
 
     /**
-     * Return an Object parameter from an object literal. NOTE this is method is NOT type safe. If
+     * Return an Object parameter from this plain object. NOTE this method is NOT type safe. If
      * you access a property that isn't an Object you will get an undefined result. Also if you
      * access a property that does not exist you will get an undefined error
      *
@@ -141,7 +143,7 @@ public class ObjLiteral {
     }
 
     /**
-     * Set the specified property on this object literal. The property will be added if it doesn't
+     * Set the specified property on this plain object. The property will be added if it doesn't
      * currently exist
      *
      * @param prop  The property to set
@@ -153,7 +155,7 @@ public class ObjLiteral {
     }
 
     /**
-     * Set the specified property on this object literal. The property will be added if it doesn't
+     * Set the specified property on this plain object. The property will be added if it doesn't
      * currently exist
      *
      * @param prop  The property to set
@@ -165,7 +167,7 @@ public class ObjLiteral {
     }
 
     /**
-     * Set the specified property on this object literal. The property will be added if it doesn't
+     * Set the specified property on this plain object. The property will be added if it doesn't
      * currently exist
      *
      * @param prop  The property to set
@@ -177,7 +179,7 @@ public class ObjLiteral {
     }
 
     /**
-     * Set the specified property on this object literal. The property will be added if it doesn't
+     * Set the specified property on this plain object. The property will be added if it doesn't
      * currently exist
      *
      * @param prop  The property to set
@@ -189,7 +191,7 @@ public class ObjLiteral {
     }
 
     /**
-     * Set the specified property on this object literal. The property will be added if it doesn't
+     * Set the specified property on this plain object. The property will be added if it doesn't
      * currently exist
      *
      * @param prop  The property to set
@@ -206,27 +208,27 @@ public class ObjLiteral {
     }
 
     /**
-     * Return a new object literal that is the result of merging this object literal with the supplied literal.
-     * If the same property is defined in toMerge as this it's value will be applied to the result
-     * literal e.g {a:1, b:1}.merge({b:2, c:3} would result in {a:1, b:2, c:3}
+     * Return a new plain object that is the result of merging this plain object with the supplied
+     * plain object. Any property in this object that has the same name in toMerge will be replaced
+     * with toMerge's value e.g {a:1, b:1}.merge({b:2, c:3}) would result in {a:1, b:2, c:3}
      *
      * @param toMerge The object to merge
-     * @return        The merged literal
+     * @return        The merged jsPlainObj
      */
     @JsOverlay
-    final public <R extends ObjLiteral, O extends ObjLiteral> R merge(O toMerge) {
+    final public <R extends JsPlainObj, O extends JsPlainObj> R merge(O toMerge) {
         return JsHelper.merge(this, toMerge);
     }
 
     /**
-     * Return a new object literal that contains all the properties of this literal except the ones defined
-     * in the exclude list e.g {a:1, b:2, c:3}.exclude("a","c") would result in {b:2}
+     * Return a new plain object that contains all the properties of this object except the ones
+     * defined in the exclude list e.g {a:1, b:2, c:3}.exclude("a","c") would result in {b:2}
      *
      * @param exclude The properties to exclude
-     * @return        The new literal
+     * @return        The new jsPlainObj
      */
     @JsOverlay
-    final public <R extends ObjLiteral, O extends ObjLiteral> R except(String ...exclude) {
+    final public <R extends JsPlainObj, O extends JsPlainObj> R except(String ...exclude) {
         return JsHelper.except(this, exclude);
     }
 }

@@ -1,4 +1,4 @@
-package gwt.interop.utils.shared.objectliterals;
+package gwt.interop.utils.shared.plainobjects;
 
 import gwt.interop.utils.shared.collections.Array;
 import gwt.interop.utils.shared.collections.StringMap;
