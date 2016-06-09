@@ -369,7 +369,7 @@ public class JavaArray<T> implements Array<T> {
     }
 
     /*********************************************************************************************
-     * Java Compatability
+     * Java Compatibility
      *********************************************************************************************/
 
     public Iterable<T> asIterable() {
