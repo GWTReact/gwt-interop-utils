@@ -53,8 +53,6 @@ gwt {
     minHeapSize = "512M";
     maxHeapSize = "4096M";
 
-    GwtTestOptions.hasGwtTests = true;
-
     dependencies {
         //gwt group: 'com.github.gwtreact', name: 'gwt-react', version: '0.1.0'
     }

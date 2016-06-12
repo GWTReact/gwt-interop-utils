@@ -39,6 +39,9 @@ public class JsPlainObj {
      * Initialize a plain object with the specified property values. For example,
      * $jsPlainObj("a",1, "b","somevalue) is eqivalent to the following javascript
      *  { a: 1, b: "somevalue" }
+     *
+     * @param fieldValues a set of 1 or more (field name, value) pairs
+     * @return The initialzed plain object
      */
     @JsOverlay
     public static JsPlainObj $jsPlainObj(Object ...fieldValues) {
@@ -49,6 +52,10 @@ public class JsPlainObj {
      * Initialize a specified plain object with the specified property values. For example,
      * $(new MyJsPlainObj(), "a",1, "b","somevalue) is eqivalent to the following javascript
      *  { a: 1, b: "somevalue" }
+     *
+     *  @param <O> The type of plain object
+     *  @param fieldValues a set of 1 or more (field name, value) pairs
+     *  @return The initialzed plain object
      */
     @JsOverlay
     public static <O> O $(O jsPlainObj, Object ...fieldValues) {
@@ -58,14 +65,8 @@ public class JsPlainObj {
             if (fieldName == null)
                 fieldName = (String)f;
             else {
-                if (f instanceof String)
-                    JsHelper.setObjectProperty(jsPlainObj, fieldName, f);
-                else if (f instanceof Integer)
+                if (f instanceof Integer)
                     JsHelper.setObjectProperty(jsPlainObj, fieldName, ((Integer) f).intValue());
-                else if (f instanceof Double)
-                    JsHelper.setObjectProperty(jsPlainObj, fieldName, ((Double) f).doubleValue());
-                else if (f instanceof Boolean)
-                    JsHelper.setObjectProperty(jsPlainObj, fieldName, ((Boolean) f).booleanValue());
                 else
                     JsHelper.setObjectProperty(jsPlainObj, fieldName, f);
 
@@ -195,7 +196,8 @@ public class JsPlainObj {
      * currently exist
      *
      * @param prop  The property to set
-     * @param v     The value to set the property to
+     * @param <V> The type of value to set
+     * @param v The value to set the property to
      */
     @JsOverlay
     final public <V> void set(String prop, V v) {
@@ -213,7 +215,8 @@ public class JsPlainObj {
      * with toMerge's value e.g {a:1, b:1}.merge({b:2, c:3}) would result in {a:1, b:2, c:3}
      *
      * @param toMerge The object to merge
-     * @return        The merged jsPlainObj
+     * @param <O> The type of plain object to merge
+     * @return The merged JsPlainObj
      */
     @JsOverlay
     final public <R extends JsPlainObj, O extends JsPlainObj> R merge(O toMerge) {
@@ -225,7 +228,7 @@ public class JsPlainObj {
      * defined in the exclude list e.g {a:1, b:2, c:3}.exclude("a","c") would result in {b:2}
      *
      * @param exclude The properties to exclude
-     * @return        The new jsPlainObj
+     * @return The new JsPlainObj
      */
     @JsOverlay
     final public <R extends JsPlainObj, O extends JsPlainObj> R except(String ...exclude) {
