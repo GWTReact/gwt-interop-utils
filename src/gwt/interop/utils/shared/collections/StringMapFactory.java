@@ -13,7 +13,7 @@ public class StringMapFactory {
         StringMapFactory.mapConstructor = mapConstructor;
     }
 
-    public static <T> StringMap<T> createMap() {
+    public static <T> StringMap<T> create() {
         assert mapConstructor != null : "You need to call StringMapFactory.setConstructor first";
         return mapConstructor.create();
     }

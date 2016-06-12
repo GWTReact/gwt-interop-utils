@@ -11,7 +11,7 @@ public class ArrayFactory {
     public static void setConstructor(ArrayConstructor arrayConstructor) {
         ArrayFactory.arrayConstructor = arrayConstructor;
     }
-    public static <T> Array<T> createArray() {
+    public static <T> Array<T> create() {
         assert arrayConstructor != null : "You need to call ArrayFactory.setConstructor first";
         return arrayConstructor.create();
     }

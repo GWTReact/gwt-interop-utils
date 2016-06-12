@@ -3,7 +3,7 @@ package gwt.interop.utils.shared.collections;
 public class ClientServerCommonMapTests {
     public static void run() {
 
-        StringMap<String> m1 = StringMap.create();
+        StringMap<String> m1 = StringMapFactory.create();
 
         /* put, get, hasKey */
         m1.put("V1", "Value1");
@@ -12,7 +12,7 @@ public class ClientServerCommonMapTests {
         assert(m1.hasKey("V1"));
         assert(!m1.hasKey("V12"));
 
-        m1 = StringMap.create();
+        m1 = StringMapFactory.create();
         m1.put("V1", "Value1");
         m1.put("V1", "Value1.1");
         m1.put("V2", "Value2");
@@ -26,7 +26,7 @@ public class ClientServerCommonMapTests {
         assert(toString(mapValues).equals("Value1.1,Value2"));
 
         /* remove */
-        m1 = StringMap.create();
+        m1 = StringMapFactory.create();
         m1.put("V1", "Value1");
         m1.put("V2", "Value2");
 

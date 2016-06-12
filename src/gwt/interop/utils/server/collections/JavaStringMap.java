@@ -59,7 +59,7 @@ public class JavaStringMap<T> implements StringMap<T> {
     /**
      * Returns the keys defined in the map
      *
-     * @return
+     * @return an Array of string keys
      */
     public Array<String> keys() {
 
@@ -75,7 +75,7 @@ public class JavaStringMap<T> implements StringMap<T> {
     /**
      * Returns the values defined in the map
      *
-     * @return
+     * @return an Array of values
      */
     public Array<T> values() {
         Array<T> out = new JavaLinkedArray<>();

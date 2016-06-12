@@ -23,7 +23,6 @@ SOFTWARE. */
 
 import com.google.gwt.core.client.JavaScriptObject;
 import gwt.interop.utils.shared.collections.Array;
-import gwt.interop.utils.shared.valuetypes.NumberValue;
 
 /**
  * A set of low level Javascript functions useful for building JsInterop interfaces
@@ -31,10 +30,6 @@ import gwt.interop.utils.shared.valuetypes.NumberValue;
  * @author pstockley
  */
 public class JsHelper {
-
-    public static native <T extends Object> Array<T> createArray() /*-{
-        return [];
-    }-*/;
 
     /**
      * Set the given int property on a javascript object
@@ -141,22 +136,6 @@ public class JsHelper {
         return o;
     }-*/;
 
-    /**
-     * Set the Array value at the supplied index
-     *
-     * @param a
-     * @param i
-     * @param v
-     * @param <T>
-     */
-    public static native <T> void setArrayValue(Array a, int i, T v) /*-{
-        a[i] = v;
-    }-*/;
-
-    public static native <T> T getArrayValue(Array a, int i) /*-{
-        return a[i];
-    }-*/;
-
     public static native void applyPolyfills() /*-{
         if (typeof Object.assign == 'function') {
             Object.assign = function (target) {
@@ -201,14 +180,6 @@ public class JsHelper {
         }
 
         return out;
-    }-*/;
-
-    public static native NumberValue createNumber(double d) /*-{
-        return new Number(d);
-    }-*/;
-
-    public static native double castAsDouble(NumberValue n) /*-{
-        return n;
     }-*/;
 
     public native JavaScriptObject getGlobalObject() /*-{

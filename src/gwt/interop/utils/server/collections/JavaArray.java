@@ -285,14 +285,6 @@ public class JavaArray<T> implements Array<T> {
     }
 
     @Override
-    public double reduce(ReduceDoubleFn<T> fn, double initialValue) {
-        for(T elem : internalArray) {
-            initialValue = fn.doReduce(initialValue, elem);
-        }
-        return initialValue;
-    }
-
-    @Override
     public <A> A reduceRight(ReduceFn<A, T> fn, A initialValue) {
         for(int i = internalArray.size() - 1; i >=0 ; i--) {
             initialValue = fn.doReduce(initialValue, get(i));
@@ -304,14 +296,6 @@ public class JavaArray<T> implements Array<T> {
     public <A> A reduceRight(ReduceFullFn<A, T> fn, A initialValue) {
         for(int i = internalArray.size() - 1; i >=0 ; i--) {
             initialValue = fn.doReduce(initialValue, get(i), i, this);
-        }
-        return initialValue;
-    }
-
-    @Override
-    public double reduceRight(ReduceDoubleFn<T> fn, double initialValue) {
-        for(int i = internalArray.size() - 1; i >=0 ; i--) {
-            initialValue = fn.doReduce(initialValue, get(i));
         }
         return initialValue;
     }
@@ -379,4 +363,6 @@ public class JavaArray<T> implements Array<T> {
     public Stream<T> stream() {
         return internalArray.stream();
     }
+
+    public List<T> asList() { return internalArray; }
 }

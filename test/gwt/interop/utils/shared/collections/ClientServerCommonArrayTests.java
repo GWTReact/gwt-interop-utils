@@ -6,7 +6,7 @@ public class ClientServerCommonArrayTests {
 
     public static void run() {
         //TODO convert to independent JUnit tests
-        Array<String> a = Array.create();
+        Array<String> a = ArrayFactory.create();
 
         a.push("Val1");
         a.push("Val2");
@@ -179,7 +179,7 @@ public class ClientServerCommonArrayTests {
         assert(accum == -2);
 
         /* create */
-        a = Array.create();
+        a = ArrayFactory.create();
         a.push("100");
         a.push("200");
         assert(toString(a).equals("100,200"));
@@ -209,7 +209,7 @@ public class ClientServerCommonArrayTests {
 
     @SafeVarargs
     private static <T> Array<T> createArray(T ...values) {
-        Array<T> o = Array.create();
+        Array<T> o = ArrayFactory.create();
 
         for(T value : values) {
             o.push(value);

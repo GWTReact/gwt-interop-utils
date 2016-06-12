@@ -21,10 +21,9 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE. */
 
-import gwt.interop.utils.shared.JsHelper;
 import jsinterop.annotations.*;
 
-import java.util.NoSuchElementException;
+import java.util.List;
 
 /**
  * An interface to a Javascript array. The implementation may be different on the client
@@ -32,7 +31,7 @@ import java.util.NoSuchElementException;
  *
  * @author pstockley
  *
- * @param <T>
+ * @param <T> The type of value this array holds
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Array")
 public interface Array<T> {
@@ -81,7 +80,7 @@ public interface Array<T> {
      */
     @JsOverlay
     default T get(int index) {
-        return JsHelper.getArrayValue(this, index);
+        return JsArrayHelper.getArrayValue(this, index);
     }
 
     /**
@@ -90,6 +89,9 @@ public interface Array<T> {
      * based on how JavaScript values are converted into strings.
      * <p>
      * See <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join">join spec</a>
+     *
+     * @param separator The separator to place between each element
+     * @return The joined string
      */
     String join(String separator);
 
@@ -111,6 +113,8 @@ public interface Array<T> {
 
     /**
      * Pushes the given value onto the end of the array.
+     *
+     * @param value The value to add to the end of the array
      */
     void push(T value);
 
@@ -126,9 +130,9 @@ public interface Array<T> {
     @JsOverlay
     default void set(int index, T value) {
         if (index >= getLength())
-            throw new NoSuchElementException();
+            throw new IndexOutOfBoundsException();
 
-        JsHelper.setArrayValue(this, index, value);
+        JsArrayHelper.setArrayValue(this, index, value);
     }
 
     /**
@@ -154,7 +158,7 @@ public interface Array<T> {
      * <p>
      * See <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reverse">reverse spec</a>
      *
-     * @return
+     * @return The reversed array
      */
     Array<T> reverse();
 
@@ -311,10 +315,11 @@ public interface Array<T> {
      * See <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map">map spec</a>
      *
      * @param fn One of MapFn or MapFullFn
+     * @param <T2> The type of output from the map function
+     *
      * @return The new mapped array
      */
     <T2 extends Object> Array<T2> map(MapFn<T, T2> fn);
-
     <T2 extends Object> Array<T2> map(MapFullFn<T, T2> fn);
 
     /**
@@ -325,14 +330,11 @@ public interface Array<T> {
      *
      * @param fn           One of ReduceFn, ReduceDoubleFn or ReduceFullFn
      * @param initialValue The initial accumulator value
-     * @return
+     * @param <A> The type of accumulator
+     * @return The reduced accumulator value
      */
     <A extends Object> A reduce(ReduceFn<A, T> fn, A initialValue);
-
     <A extends Object> A reduce(ReduceFullFn<A, T> fn, A initialValue);
-
-    double reduce(ReduceDoubleFn<T> fn, double initialValue);
-
 
     /**
      * Applies a function against an accumulator and each value of the array (from right-to-left)
@@ -342,13 +344,11 @@ public interface Array<T> {
      *
      * @param fn           One of ReduceFn, ReduceDoubleFn or ReduceFullFn
      * @param initialValue The initial accumulator value
-     * @return
+     * @param <A> The type of accumulator
+     * @return The reduced accumulator value
      */
     <A extends Object> A reduceRight(ReduceFn<A, T> fn, A initialValue);
-
     <A extends Object> A reduceRight(ReduceFullFn<A, T> fn, A initialValue);
-
-    double reduceRight(ReduceDoubleFn<T> fn, double initialValue);
 
     /**
      * Tests whether some element in the array passes the run implemented by the provided function.
@@ -359,7 +359,6 @@ public interface Array<T> {
      * @return true if the run function returns true for one of the elements
      */
     boolean some(TestFn<T> fn);
-
     boolean some(TestFullFn<T> fn);
 
     /**
@@ -371,7 +370,6 @@ public interface Array<T> {
      * @return true if the run function returns true for all of the elements
      */
     boolean every(TestFn<T> fn);
-
     boolean every(TestFullFn<T> fn);
 
     /**
@@ -386,12 +384,42 @@ public interface Array<T> {
      * @return The sorted array
      */
     Array<T> sort(SortFn<T> fn);
-
     Array<T> sort();
 
+    /*********************************************************************************************
+     * Java Compatibility
+     *********************************************************************************************/
+
+    /**
+     * Return an Iterable&lt;T&gt; for this Array. This enables Arrays to be the target of
+     * target of the "for-each loop" statement
+     *
+     * @return An ArrayIterable
+     */
     @JsOverlay
-    static <T> Array<T> create() {
-        return ArrayFactory.createArray();
+    public default Iterable<T> asIterable() {
+        return new ArrayIterable<>(this);
+    }
+
+    /* Enable once stream support lands in GWT 2.8
+    @JsOverlay
+    public default Stream<T> stream() {
+       //TODO
+    }
+    */
+
+    /**
+     * Returns an adapter class so you can treat this Array as a Java List&lt;T&gt; Any
+     * mutations effected through the List interface will reflect in the underlying
+     * array. Each time you call this method you will receive a new adapter object.
+     * Therefore equality checks between different adapters that wrap the same Array
+     * will fail.
+     *
+     * @return An ArrayListAdapter
+     */
+    @JsOverlay
+    public default List<T> asList() {
+        return new ArrayListAdapter<T>(this);
     }
 
     /* Functional interfaces */
@@ -445,20 +473,4 @@ public interface Array<T> {
     public interface SortFn<T> {
         int compare(T o1, T o2);
     }
-
-    /*********************************************************************************************
-     * Java Compatibility
-     *********************************************************************************************/
-
-    @JsOverlay
-    public default Iterable<T> asIterable() {
-        return new ArrayIterable<>(this);
-    }
-
-    /* Enable once stream support lands in GWT 2.8
-    @JsOverlay
-    public default Stream<T> stream() {
-       //TODO
-    }
-    */
 }

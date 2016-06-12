@@ -80,7 +80,7 @@ public interface StringMap<T> {
     /**
      * Returns the keys defined in the map
      *
-     * @return
+     * @return An Array of string keys
      */
     @JsOverlay default Array<String> keys() {
         return JsHelper.objectProperties(this);
@@ -89,7 +89,7 @@ public interface StringMap<T> {
     /**
      * Returns the values defined in the map
      *
-     * @return
+     * @return An Array&lt;T&gt; of values
      */
     @JsOverlay default Array<T> values() {
         return JsHelper.objectValues(this);
@@ -103,12 +103,17 @@ public interface StringMap<T> {
         keys().forEachElem((key) -> remove(key));
     }
 
+    /**
+     * Returns the size of the map
+     *
+     * @return The size
+     */
     @JsOverlay default int size() { return 1; }
 
     /**
      * Invokes the given callback for each key / value pair in the map
      *
-     * @param forEachFn
+     * @param forEachFn The callback to invoke
      */
     @JsOverlay default void forEach(ForEachFn<T> forEachFn) {
         Array<String> keys = keys();
@@ -122,20 +127,10 @@ public interface StringMap<T> {
     /**
      * Copies all entries from the provided ObservableMap into this map
      *
-     * @param toMerge
+     * @param toMerge The StringMap to merge with this one
      */
     @JsOverlay default void merge(StringMap<T> toMerge) {
         toMerge.forEach((value, key, maps) -> put(key, value));
-    }
-
-    /**
-     * Create an instance of a StringMap.
-     *
-     * @param <T> The type of value the map holds
-     * @return The new instance
-     */
-    @JsOverlay static <T> StringMap<T> create() {
-        return StringMapFactory.createMap();
     }
 
     /**

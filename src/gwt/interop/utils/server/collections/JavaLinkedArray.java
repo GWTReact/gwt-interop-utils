@@ -2,10 +2,7 @@ package gwt.interop.utils.server.collections;
 
 import gwt.interop.utils.shared.collections.Array;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.LinkedList;
+import java.util.*;
 import java.util.stream.Stream;
 
 public class JavaLinkedArray<T> implements Array<T> {
@@ -290,14 +287,6 @@ public class JavaLinkedArray<T> implements Array<T> {
     }
 
     @Override
-    public double reduce(ReduceDoubleFn<T> fn, double initialValue) {
-        for(T elem : internalArray) {
-            initialValue = fn.doReduce(initialValue, elem);
-        }
-        return initialValue;
-    }
-
-    @Override
     public <A> A reduceRight(ReduceFn<A, T> fn, A initialValue) {
         Iterator<T> iterator = internalArray.descendingIterator();
 
@@ -316,17 +305,6 @@ public class JavaLinkedArray<T> implements Array<T> {
         while(iterator.hasNext()) {
             T elem = iterator.next();
             initialValue = fn.doReduce(initialValue, elem, index--, this);
-        }
-        return initialValue;
-    }
-
-    @Override
-    public double reduceRight(ReduceDoubleFn<T> fn, double initialValue) {
-        Iterator<T> iterator = internalArray.descendingIterator();
-
-        while(iterator.hasNext()) {
-            T elem = iterator.next();
-            initialValue = fn.doReduce(initialValue, elem);
         }
         return initialValue;
     }
@@ -384,7 +362,7 @@ public class JavaLinkedArray<T> implements Array<T> {
     }
 
     /*********************************************************************************************
-     * Java Compatability
+     * Java Compatibility
      *********************************************************************************************/
 
     public Iterable<T> asIterable() {
@@ -394,4 +372,6 @@ public class JavaLinkedArray<T> implements Array<T> {
     public Stream<T> stream() {
         return internalArray.stream();
     }
+
+    public List<T> asList() { return internalArray; }
 }

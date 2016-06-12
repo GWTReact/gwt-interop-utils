@@ -1,8 +1,9 @@
 package gwt.interop.utils.shared.plainobjects;
 
 import gwt.interop.utils.shared.collections.Array;
+import gwt.interop.utils.shared.collections.ArrayFactory;
 import gwt.interop.utils.shared.collections.StringMap;
-import gwt.interop.utils.shared.valuetypes.NumberValue;
+import gwt.interop.utils.shared.collections.StringMapFactory;
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
@@ -11,9 +12,10 @@ import jsinterop.annotations.JsType;
 public class CommonDataObject {
     public int intVal;
     public double doubleVal;
+    public Double doubleObjVal; //This is synonymous with a javascript Number object
     public boolean booleanVal;
+    public Boolean booleanObjVal; //This is synonymous with a javascript Boolean object
     public String stringVal;
-    public NumberValue numberVal;
     public Array<String> anArray;
     public StringMap<String> aMap;
     public CommonDataObject2 embeddedObj;
@@ -36,16 +38,17 @@ public class CommonDataObject {
         CommonDataObject o = new CommonDataObject();
         o.intVal = 10;
         o.doubleVal = 20.20;
+        o.doubleObjVal = 20.20;
         o.booleanVal = true;
+        o.booleanObjVal = true;
         o.stringVal = "A String Value";
-        o.numberVal = NumberValue.from(10);
-        o.anArray = Array.create();
+        o.anArray = ArrayFactory.create();
 
         o.anArray.push("ArrayValue1");
         o.anArray.push("ArrayValue2");
         o.anArray.push("ArrayValue3");
 
-        o.aMap = StringMap.create();
+        o.aMap = StringMapFactory.create();
 
         o.aMap.put("v1", "A Map Value 1");
         o.aMap.put("v2", "A Map Value 2");
