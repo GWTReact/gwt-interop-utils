@@ -9,6 +9,8 @@ import java.util.Map;
 public class JavaStringMap<T> implements StringMap<T> {
     private Map<String, T> internalMap;
 
+    public JavaStringMap(Map<String, T> from) { internalMap = from; }
+
     public JavaStringMap() {
         internalMap = new HashMap<>();
     }
@@ -63,7 +65,7 @@ public class JavaStringMap<T> implements StringMap<T> {
      */
     public Array<String> keys() {
 
-        Array<String> out = new JavaLinkedArray<>();
+        Array<String> out = new JavaArray<>();
 
         for(String key : internalMap.keySet()) {
             out.push(key);
@@ -78,7 +80,7 @@ public class JavaStringMap<T> implements StringMap<T> {
      * @return an Array of values
      */
     public Array<T> values() {
-        Array<T> out = new JavaLinkedArray<>();
+        Array<T> out = new JavaArray<>();
 
         for(T value : internalMap.values()) {
             out.push(value);

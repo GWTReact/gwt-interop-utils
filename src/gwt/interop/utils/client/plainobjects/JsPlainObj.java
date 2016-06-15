@@ -54,6 +54,7 @@ public class JsPlainObj {
      *  { a: 1, b: "somevalue" }
      *
      *  @param <O> The type of plain object
+     *  @param jsPlainObj The object to initialize
      *  @param fieldValues a set of 1 or more (field name, value) pairs
      *  @return The initialzed plain object
      */
@@ -215,6 +216,7 @@ public class JsPlainObj {
      * with toMerge's value e.g {a:1, b:1}.merge({b:2, c:3}) would result in {a:1, b:2, c:3}
      *
      * @param toMerge The object to merge
+     * @param <R> The type of object returned from the merge operation
      * @param <O> The type of plain object to merge
      * @return The merged JsPlainObj
      */
@@ -227,11 +229,12 @@ public class JsPlainObj {
      * Return a new plain object that contains all the properties of this object except the ones
      * defined in the exclude list e.g {a:1, b:2, c:3}.exclude("a","c") would result in {b:2}
      *
+     * @param <R> The type of object returned from the except operation
      * @param exclude The properties to exclude
      * @return The new JsPlainObj
      */
     @JsOverlay
-    final public <R extends JsPlainObj, O extends JsPlainObj> R except(String ...exclude) {
+    final public <R extends JsPlainObj> R except(String ...exclude) {
         return JsHelper.except(this, exclude);
     }
 }

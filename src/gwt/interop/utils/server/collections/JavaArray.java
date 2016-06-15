@@ -12,6 +12,8 @@ public class JavaArray<T> implements Array<T> {
         internalArray = new ArrayList<>();
     }
 
+    public JavaArray(ArrayList<T> from) { internalArray = from; }
+
     public JavaArray(JavaArray<T> from) {
         internalArray = new ArrayList<>(from.internalArray);
     }

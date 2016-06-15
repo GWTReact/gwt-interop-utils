@@ -194,7 +194,6 @@ public class ClientServerCommonArrayTests {
         }
         assert (test.toString().equals("abc"));
 
-
         if (!GWT.isClient()) {
             /* Uncomment once once streams land in GWT 2.8
             a1 = factory.create("c","b","a");

@@ -136,7 +136,7 @@ public interface StringMap<T> {
     /**
      * A callback to invoke for each key / value pair in the map
      *
-     * @param <T>
+     * @param <T> The type of value
      */
     @JsFunction
     interface ForEachFn<T> {

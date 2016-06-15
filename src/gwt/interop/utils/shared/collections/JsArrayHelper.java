@@ -4,10 +4,21 @@ import gwt.interop.utils.shared.collections.Array;
 
 public class JsArrayHelper {
 
+    /**
+     * Create a native javascript array
+     * @param <T> The type the array will hold
+     * @return The array
+     */
     public static native <T extends Object> Array<T> createArray() /*-{
         return [];
     }-*/;
 
+    /**
+     * Cast an Array interface as a Java array
+     * @param src The Array
+     * @param <E> The type the array holds
+     * @return The java array
+     */
     public static native <E> E[] castAsArray(Array src) /*-{
         return src;
     }-*/;
@@ -15,15 +26,22 @@ public class JsArrayHelper {
     /**
      * Set the Array value at the supplied index
      *
-     * @param a
-     * @param i
-     * @param v
-     * @param <T>
+     * @param a The array
+     * @param i The index
+     * @param v The value
+     * @param <T> The type of value
      */
     public static native <T> void setArrayValue(Array a, int i, T v) /*-{
         a[i] = v;
     }-*/;
 
+    /**
+     * Return the Array value at the supplied index
+     * @param a The array
+     * @param i The index
+     * @param <T> The type of value
+     * @return The value
+     */
     public static native <T> T getArrayValue(Array a, int i) /*-{
         return a[i];
     }-*/;
