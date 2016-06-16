@@ -101,7 +101,7 @@ public class JsPlainObj {
      */
     @JsOverlay
     final public double getDbl(String prop) {
-        return JsHelper.getObjectDblProperty(this, prop);
+        return JsHelper.getObjectProperty(this, prop);
     }
 
     /**
@@ -114,7 +114,7 @@ public class JsPlainObj {
      */
     @JsOverlay
     final public boolean getBool(String prop) {
-        return JsHelper.getObjectBoolProperty(this, prop);
+        return JsHelper.getObjectProperty(this, prop);
     }
 
     /**
@@ -127,7 +127,7 @@ public class JsPlainObj {
      */
     @JsOverlay
     final public String getStr(String prop) {
-        return JsHelper.getObjectStrProperty(this, prop);
+        return JsHelper.getObjectProperty(this, prop);
     }
 
     /**
@@ -141,7 +141,7 @@ public class JsPlainObj {
      */
     @JsOverlay
     final public <O> O getObj(String prop) {
-        return JsHelper.getObjectObjProperty(this, prop);
+        return JsHelper.getObjectProperty(this, prop);
     }
 
     /**

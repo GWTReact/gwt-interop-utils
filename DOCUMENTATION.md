@@ -161,7 +161,7 @@ You can combine merge and except into a pipeline of operations by chaining them 
 ## 3 Native Array support
 
 <p>gwt-interop-utils provides the <code>gwt.interop.utils.shared.collections.Array</code> Native JsType interface to allow code 
-to work with the full ES5 set of Array methods. ES5 introduced the the more functional style methods to arrays e.g. 
+to work with the full ES5 set of Array methods. ES5 introduced the more functional style methods to arrays e.g. 
 forEach, filter, map and reduce.</p>
 
 ```java
@@ -233,7 +233,7 @@ Array, you cannot do equality checks between the two adapters e.g.</p>
     List<String> a1List1 = a1.asList();
     List<String> a1List2 = a1.asList();
     
-    //Even though a1List and a2List both point to the same Array, the are not equal
+    //Even though a1List and a2List both point to the same Array, they are not equal
     
     assert(a1List1 == a1List2); //Will fail
 ```

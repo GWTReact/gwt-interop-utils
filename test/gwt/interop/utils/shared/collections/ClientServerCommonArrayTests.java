@@ -2,6 +2,8 @@ package gwt.interop.utils.shared.collections;
 
 import com.google.gwt.core.client.GWT;
 
+import java.util.List;
+
 public class ClientServerCommonArrayTests {
 
     public static void run() {
@@ -194,6 +196,36 @@ public class ClientServerCommonArrayTests {
         }
         assert (test.toString().equals("abc"));
 
+        //Standard Java List support
+
+        a1 = createArray("a", "b", "c");
+        List<String> a1List = a1.asList();
+
+        test = new StringBuilder();
+
+        for (String val : a1List) {
+            test.append(val);
+        }
+        assert (test.toString().equals("abc"));
+
+        a1List.add("d");
+        assert(toString(a1List).equals("a,b,c,d"));
+        assert(toString(a1).equals("a,b,c,d"));
+
+        a1List.remove(0);
+        assert(toString(a1List).equals("b,c,d"));
+        assert(toString(a1).equals("b,c,d"));
+
+        assert(a1List.size() == 3);
+
+        assert(a1List.contains("c") == true);
+
+        assert(a1List.get(1).equals("c"));
+
+        a1List.clear();
+        assert(toString(a1List).equals(""));
+        assert(toString(a1).equals(""));
+
         if (!GWT.isClient()) {
             /* Uncomment once once streams land in GWT 2.8
             a1 = factory.create("c","b","a");
@@ -218,5 +250,19 @@ public class ClientServerCommonArrayTests {
 
     private static String toString(Array<String> a) {
         return a.join(",");
+    }
+
+    private static String toString(List<String> a) {
+        StringBuilder sb = new StringBuilder();
+        int i = 0;
+        for(String s : a) {
+            sb.append(s);
+
+            if (i < a.size()-1) {
+                sb.append(",");
+            }
+            i++;
+        }
+        return sb.toString();
     }
 }

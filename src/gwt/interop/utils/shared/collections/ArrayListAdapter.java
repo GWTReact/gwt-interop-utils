@@ -64,7 +64,7 @@ public class ArrayListAdapter<E> extends AbstractList<E> implements List<E>,
 
     @Override
     public void clear() {
-        array = (E[]) new Object[0];
+        ArrayHelper.setLength(array, 0);
     }
 
     public Object clone() {

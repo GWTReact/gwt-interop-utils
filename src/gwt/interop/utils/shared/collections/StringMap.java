@@ -45,7 +45,7 @@ public interface StringMap<T> {
      * @return The value or null if no value is defined for that supplied key
      */
     @JsOverlay default T get(String key) {
-        return JsHelper.getObjectObjProperty(this, key);
+        return JsHelper.getObjectProperty(this, key);
     }
 
     /**

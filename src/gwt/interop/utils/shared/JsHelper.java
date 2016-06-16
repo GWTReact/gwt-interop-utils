@@ -88,19 +88,7 @@ public class JsHelper {
         return o[p];
     }-*/;
 
-    public static native <O> double getObjectDblProperty(O o, String p) /*-{
-        return o[p];
-    }-*/;
-
-    public static native <O> boolean getObjectBoolProperty(O o, String p) /*-{
-        return o[p];
-    }-*/;
-
-    public static native <O> String getObjectStrProperty(O o, String p) /*-{
-        return o[p];
-    }-*/;
-
-    public static native <O, R> R getObjectObjProperty(O o, String p) /*-{
+    public static native <O, R> R getObjectProperty(O o, String p) /*-{
         return o[p];
     }-*/;
 
@@ -133,7 +121,7 @@ public class JsHelper {
                 p.push(o[prop]);
             }
         }
-        return o;
+        return p;
     }-*/;
 
     public static native void applyPolyfills() /*-{
@@ -182,7 +170,11 @@ public class JsHelper {
         return out;
     }-*/;
 
-    public native JavaScriptObject getGlobalObject() /*-{
-        return $wnd;
+    public static native <T> T unsafeCast(Object o) /*-{
+        return o;
+    }-*/;
+
+    public static native int unsafeCastAsInt(Object o) /*-{
+        return o;
     }-*/;
 }
