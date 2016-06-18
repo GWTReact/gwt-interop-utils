@@ -7,10 +7,17 @@ General purpose utilities for use with GWT JsInterop capabilities introduced in 
 
 Check out the [Documentation](https://github.com/GWTReact/gwt-interop-utils/blob/master/DOCUMENTATION.md) for details.
 
+##Getting Started
+
+You can download the latest release .jar from Maven Central using the following coordinates:
+
+* **groupId**&nbsp;&nbsp;&nbsp; com.github.gwtreact
+* **artifactId**&nbsp;&nbsp;gwt-interop-utils
+* **version**&nbsp;&nbsp;&nbsp;  0.1.0
+
 ##Roadmap
 
 * Add support for shared date and timestamp values
-* Add support for shared boolean value objects
 
 ##Contributing
 
@@ -20,4 +27,4 @@ Once the project is stable we will be happy to except pull requests. If you find
 
 | Date | Version | Description |
 | :---      | :---  | :---  |
-| ?? | 0.1.0 | No official release yet   |
+| 6/16/2016 | 0.1.0 | initial preview release to Maven   |

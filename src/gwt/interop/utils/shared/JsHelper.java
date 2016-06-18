@@ -21,7 +21,6 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE. */
 
-import com.google.gwt.core.client.JavaScriptObject;
 import gwt.interop.utils.shared.collections.Array;
 
 /**
@@ -84,36 +83,88 @@ public class JsHelper {
     }-*/;
 
 
+    /**
+     * Retrieve an int property from a javascript object
+     * @param o The object
+     * @param p The property to get
+     * @param <O> The type of object (Must be either annotated with JsType or be based on
+     *           JavaScriptObject
+     * @return The integer value
+     */
     public static native <O> int getObjectIntProperty(O o, String p) /*-{
         return o[p];
     }-*/;
 
+    /**
+     * Retrieve an object property from a javascript object
+     *
+     * @param o The object
+     * @param p The property to get
+     * @param <O> The type of object (Must be either annotated with JsType or be based on
+     *           JavaScriptObject
+     * @param <R> The type of return object
+     * @return The object value
+     */
     public static native <O, R> R getObjectProperty(O o, String p) /*-{
         return o[p];
     }-*/;
 
+    /**
+     * Remove a property from a javascript object
+     *
+     * @param o The object
+     * @param p The property to remove
+     */
     public static native void removeProperty(Object o, String p) /*-{
         delete o[p];
     }-*/;
 
+    /**
+     * Returns is the specified property is defined on a javascript object
+     *
+     * @param o The object
+     * @param p The property to test
+     * @return true is the property exists
+     */
     public static native boolean hasProperty(Object o, String p) /*-{
         return o[p] !== undefined;
     }-*/;
 
+    /**
+     * Returns is the specified property is defined as a function on a javascript object
+     * @param o The object
+     * @param p The property to test
+     * @return true if the property exists and is a function
+     */
     public static native boolean propertyIsFunction(Object o, String p) /*-{
         return o[p] !== undefined && typeof o[p] == 'function';
     }-*/;
 
+    /**
+     * Enumerate the property names of a javascript object
+     *
+     * @param o The object
+     * @return An Array of property names
+     */
     public static native Array<String> objectProperties(Object o) /*-{
         var p = [];
 
         for (var prop in o) {
-            if (o.hasOwnProperty(prop)) p.push(prop);
+            if (o.hasOwnProperty(prop)) {
+                p.push(prop);
+            }
         }
 
         return p;
     }-*/;
 
+    /**
+     * Enumerate the property values of a javascript object
+     *
+     * @param o The object
+     * @param <T> The type of values
+     * @return An Array of values
+     */
     public static native <T> Array<T> objectValues(Object o) /*-{
         var p = [];
         for (var prop in o) {
@@ -124,8 +175,8 @@ public class JsHelper {
         return p;
     }-*/;
 
-    public static native void applyPolyfills() /*-{
-        if (typeof Object.assign == 'function') {
+    public static native <R> R merge(Object o1, Object o2) /*-{
+        if (typeof Object.assign != 'function') {
             Object.assign = function (target) {
                 'use strict';
                 if (target == null) {
@@ -146,10 +197,6 @@ public class JsHelper {
                 return target;
             };
         }
-     }-*/;
-
-
-    public static native <R> R merge(Object o1, Object o2) /*-{
         return Object.assign({}, o1, o2);
     }-*/;
 
@@ -170,10 +217,23 @@ public class JsHelper {
         return out;
     }-*/;
 
+    /**
+     * Perform an unsafe cast of an object
+     *
+     * @param o The object
+     * @param <T> The type to cast to
+     * @return The object cast to the specified type
+     */
     public static native <T> T unsafeCast(Object o) /*-{
         return o;
     }-*/;
 
+    /**
+     * Perform an unsafe cast of an object into an int value
+     *
+     * @param o The object
+     * @return The object cast to an int
+     */
     public static native int unsafeCastAsInt(Object o) /*-{
         return o;
     }-*/;
