@@ -24,6 +24,8 @@ SOFTWARE. */
 import jsinterop.annotations.*;
 
 import java.util.List;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 /**
  * An interface to a Javascript array. The implementation may be different on the client
@@ -401,12 +403,11 @@ public interface Array<T> {
         return new ArrayIterable<>(this);
     }
 
-    /* Enable once stream support lands in GWT 2.8
+
     @JsOverlay
     public default Stream<T> stream() {
-       //TODO
+       return StreamSupport.stream(new ArrayIterable<>(this).spliterator(), false);
     }
-    */
 
     /**
      * Returns an adapter class so you can treat this Array as a Java List&lt;T&gt; Any

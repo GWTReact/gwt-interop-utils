@@ -1,7 +1,5 @@
 package gwt.interop.utils.shared.collections;
 
-import com.google.gwt.core.client.GWT;
-
 import java.util.List;
 
 public class ClientServerCommonArrayTests {
@@ -162,7 +160,7 @@ public class ClientServerCommonArrayTests {
         double accum = intArray.reduce((prev, current) -> prev + current, 0);
         assert(accum == 6);
 
-        accum = intArray.reduce((prev, current) -> prev + current, Integer.valueOf(0));
+        accum = intArray.reduce((prev, current) -> prev + current, 0);
         assert(accum == 6);
 
         accum = intArray.reduce((prev, current, index, array) -> prev + current, 0);
@@ -174,7 +172,7 @@ public class ClientServerCommonArrayTests {
         accum = intArray.reduceRight((prev, current) -> current - prev, 0);
         assert(accum == -2);
 
-        accum = intArray.reduceRight((prev, current) -> current - prev, Integer.valueOf(0));
+        accum = intArray.reduceRight((prev, current) -> current - prev, 0);
         assert(accum == -2);
 
         accum = intArray.reduceRight((prev, current, index, array) -> current - prev, 0);
@@ -218,7 +216,7 @@ public class ClientServerCommonArrayTests {
 
         assert(a1List.size() == 3);
 
-        assert(a1List.contains("c") == true);
+        assert(a1List.contains("c"));
 
         assert(a1List.get(1).equals("c"));
 
@@ -226,16 +224,12 @@ public class ClientServerCommonArrayTests {
         assert(toString(a1List).equals(""));
         assert(toString(a1).equals(""));
 
-        if (!GWT.isClient()) {
-            /* Uncomment once once streams land in GWT 2.8
-            a1 = factory.create("c","b","a");
-            test = new StringBuilder();
+        a1 = createArray("c","b","a");
+        test = new StringBuilder();
 
-            a1.stream().forEach(test::append);
+        a1.stream().forEach(test::append);
 
-            assert(test.toString().equals("cba"));
-            */
-        }
+        assert(test.toString().equals("cba"));
     }
 
     @SafeVarargs
