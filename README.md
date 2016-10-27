@@ -1,8 +1,6 @@
 # gwt-interop-utils
 General purpose utilities for use with GWT JsInterop capabilities introduced in GWT 2.8
 
-***Please note: the project currently depends on a Snapshot build of GWT 2.8 to work. Consider this project a preview. The API is highly likely to change.***
-
 ##Documentation
 
 Check out the [Documentation](https://github.com/GWTReact/gwt-interop-utils/blob/master/DOCUMENTATION.md) for details.
@@ -13,7 +11,7 @@ You can download the latest release .jar from Maven Central using the following 
 
 * **groupId**&nbsp;&nbsp;&nbsp; com.github.gwtreact
 * **artifactId**&nbsp;&nbsp;gwt-interop-utils
-* **version**&nbsp;&nbsp;&nbsp;  0.1.0
+* **version**&nbsp;&nbsp;&nbsp;  0.2.0
 
 ##Roadmap
 
@@ -27,4 +25,5 @@ Once the project is stable we will be happy to except pull requests. If you find
 
 | Date | Version | Description |
 | :---      | :---  | :---  |
+| 10/27/2016 | 0.2.0 | Update to GWT 2.8   |
 | 6/16/2016 | 0.1.0 | initial preview release to Maven   |
