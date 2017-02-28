@@ -44,7 +44,7 @@ public interface Array<T> {
      * @return <code>true</code> if not empty
      */
     @JsOverlay
-    static boolean isNotEmpty(Array a) {
+    static boolean isNotEmpty(Array<?> a) {
 
         return !isEmpty(a);
     }
@@ -56,7 +56,7 @@ public interface Array<T> {
      * @return <code>true</code> if empty or null
      */
     @JsOverlay
-    static boolean isEmpty(Array a) {
+    static boolean isEmpty(Array<?> a) {
 
         return null == a || a.getLength() == 0;
     }
@@ -406,7 +406,7 @@ public interface Array<T> {
 
     @JsOverlay
     public default Stream<T> stream() {
-       return StreamSupport.stream(new ArrayIterable<>(this).spliterator(), false);
+        return StreamSupport.stream(new ArrayIterable<>(this).spliterator(), false);
     }
 
     /**

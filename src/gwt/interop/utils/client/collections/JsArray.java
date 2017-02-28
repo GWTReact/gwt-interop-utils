@@ -33,6 +33,12 @@ import gwt.interop.utils.shared.collections.Array;
  */
 public class JsArray {
 
+    /**
+     * This is a static class.
+     */
+    private JsArray(){
+    }
+
     public static <T extends Object> Array<T> create() {
         return JsArrayHelper.createArray();
     }

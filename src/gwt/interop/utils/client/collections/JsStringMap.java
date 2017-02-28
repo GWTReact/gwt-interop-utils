@@ -33,11 +33,15 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name="Object")
 public class JsStringMap {
+    /**
+     * This is a static class.
+     */
+    private JsStringMap() {
+    }
 
+    @SuppressWarnings("unchecked")
     @JsOverlay
     public static <T> StringMap<T> create() {
         return (StringMap<T>) new JsStringMap();
     }
-
-
 }

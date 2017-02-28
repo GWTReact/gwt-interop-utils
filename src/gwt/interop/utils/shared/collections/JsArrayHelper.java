@@ -10,8 +10,8 @@ public class JsArrayHelper {
      * @return The array
      */
     public static native <T extends Object> Array<T> createArray() /*-{
-        return [];
-    }-*/;
+		return [];
+	}-*/;
 
     /**
      * Cast an Array interface as a Java array
@@ -19,9 +19,9 @@ public class JsArrayHelper {
      * @param <E> The type the array holds
      * @return The java array
      */
-    public static native <E> E[] castAsArray(Array src) /*-{
-        return src;
-    }-*/;
+    public static native <E> E[] castAsArray(Array<?> src) /*-{
+		return src;
+	}-*/;
 
     /**
      * Set the Array value at the supplied index
@@ -31,9 +31,9 @@ public class JsArrayHelper {
      * @param v The value
      * @param <T> The type of value
      */
-    public static native <T> void setArrayValue(Array a, int i, T v) /*-{
-        a[i] = v;
-    }-*/;
+    public static native <T> void setArrayValue(Array<T> a, int i, T v) /*-{
+		a[i] = v;
+	}-*/;
 
     /**
      * Return the Array value at the supplied index
@@ -42,7 +42,7 @@ public class JsArrayHelper {
      * @param <T> The type of value
      * @return The value
      */
-    public static native <T> T getArrayValue(Array a, int i) /*-{
-        return a[i];
-    }-*/;
+    public static native <T> T getArrayValue(Array<T> a, int i) /*-{
+		return a[i];
+	}-*/;
 }

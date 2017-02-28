@@ -23,7 +23,7 @@ public class ArrayListAdapter<E> extends AbstractList<E> implements List<E>,
      */
     private transient E[] array;
 
-    public ArrayListAdapter(Array src) {
+    public ArrayListAdapter(Array<?> src) {
         array = JsArrayHelper.castAsArray(src);
     }
 
