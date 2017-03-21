@@ -1,4 +1,4 @@
-##Contents
+## Contents
 
 1. Plain Javascript objects
 2. Plain Javascript object support class
@@ -19,7 +19,7 @@
 7. Common Functional Interfaces
 8. Low level Javascript utilities
 
-##1. Plain Javascript objects
+## 1. Plain Javascript objects
 
 <p>Many javascript libraries make extensive use of plain Javascript objects to pass parameters and return results.
 These are objects that constructed using <code>new Object()</code> or more commonly using literal initializers e.g.
@@ -73,7 +73,7 @@ the subclass.</p>
 <p>gwt-interop-utils introduces the <code>JsPlainObj</code> class to make life easier to work with plain Javascript objects.
 This class provides the following capabilities:</p>
 
-####2.1 Typeless objects
+#### 2.1 Typeless objects
 
 <p>You can define an arbritary object without defining an explicit class. This is useful for quickly converting JS code
 before you introduce types e.g.</p>
@@ -84,7 +84,7 @@ before you introduce types e.g.</p>
    state.set("newTodo", "A new todo")
 ```
 
-####2.2 Inline initialization
+#### 2.2 Inline initialization
 
 Another capability that is very useful is inline initialization e.g.
 
@@ -108,7 +108,7 @@ In may cases you won't notice any problems. However, if using $ initializers is 
 is to use use a typed class instead. If you want the fastest possible way then you will still need to use JSNI.</p>
 
 
-####2.3 Merging objects
+#### 2.3 Merging objects
 
 <p>One common pattern you will see in React code is to take a set of props and merge in additional props.
 Typically for ES5 code they will use the <code>Object.assign</code> method and for ES2017 code they will use the object
@@ -431,7 +431,7 @@ If on the server side you want to manipulate the collections using the tradition
     o.aMap = new JavaStringMap(existingMap);
 ```
 
-####6.1 Shared Methods
+#### 6.1 Shared Methods
 
 <p>Using the server emulation classes you can now write methods on your Data Transfer Objects that can be called both on the
 client and server</p>
@@ -464,7 +464,7 @@ client and server</p>
     }
 ```
 
-####6.2 Collection Factories
+#### 6.2 Collection Factories
 
 <p>If within your shared DTO methods you want to construct Array and StringMap instances, you can use
 the factory methods provided by gwt-interop-utils e.g.</p>
