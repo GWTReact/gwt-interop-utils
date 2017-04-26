@@ -121,6 +121,13 @@ public interface Array<T> {
     void push(T value);
 
     /**
+     * Pushes the given value onto the end of the array.
+     *
+     * @param value The value to add to the end of the array
+     */
+    void push(T ...value);
+
+    /**
      * Sets the object value at a given index.
      * <p>
      * Unlike the native Javascript Array, if the index is out of bounds a NoSuchElementException
@@ -310,6 +317,18 @@ public interface Array<T> {
     Array<T> filter(TestFn<T> fn);
 
     Array<T> filter(TestFullFn<T> fn);
+
+    /**
+     * Returns the value of the first element in the array that satisfies the provided testing function. Otherwise null is returned.
+     * <p>
+     * See <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find">find spec</a>
+     *
+     * @param fn One of TestFn or TestFullFn
+     * @return A value in the array if an element passes the test; otherwise, null.
+     */
+    T find(TestFn<T> fn);
+
+    T find(TestFullFn<T> fn);
 
     /**
      * Creates a new array with the results of calling a provided function on every element in this array

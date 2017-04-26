@@ -26,7 +26,7 @@ public class JavaLinkedArray<T> implements Array<T> {
     public Array<T> concat(Array<T> a) {
         JavaLinkedArray<T> out = new JavaLinkedArray<>(this);
 
-        a.forEachElem(out::push);
+        a.forEachElem((ForEachFn<T>) out::push);
 
         return out;
     }
@@ -76,6 +76,11 @@ public class JavaLinkedArray<T> implements Array<T> {
     @Override
     public void push(T value) {
         internalArray.add(value);
+    }
+
+    @Override
+    public void push(T[] value) {
+
     }
 
     @Override
@@ -244,6 +249,28 @@ public class JavaLinkedArray<T> implements Array<T> {
             }
         }
         return out;
+    }
+
+    @Override
+    public T find(TestFn<T> fn) {
+        for(T elem : internalArray) {
+            if (fn.test(elem)) {
+                return elem;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public T find(TestFullFn<T> fn) {
+        int index = 0;
+
+        for(T elem : internalArray) {
+            if (fn.test(elem, index++, this)) {
+                return elem;
+            }
+        }
+        return null;
     }
 
     @Override
