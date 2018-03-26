@@ -26,6 +26,7 @@ import gwt.interop.utils.shared.JsHelper;
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
+import jsinterop.base.Js;
 
 /**
  * This class represents a Plain Javascript Object i.e An object that
@@ -66,10 +67,7 @@ public class JsPlainObj {
             if (fieldName == null)
                 fieldName = (String)f;
             else {
-                if (f instanceof Integer)
-                    JsHelper.setObjectProperty(jsPlainObj, fieldName, ((Integer) f).intValue());
-                else
-                    JsHelper.setObjectProperty(jsPlainObj, fieldName, f);
+                Js.asPropertyMap(jsPlainObj).set(fieldName, f);
 
                 fieldName = null;
             }
@@ -88,7 +86,7 @@ public class JsPlainObj {
      */
     @JsOverlay
     final public int getInt(String prop) {
-        return JsHelper.getObjectIntProperty(this, prop);
+        return Js.asPropertyMap(this).getAny(prop).asInt();
     }
 
     /**
@@ -101,7 +99,7 @@ public class JsPlainObj {
      */
     @JsOverlay
     final public double getDbl(String prop) {
-        return JsHelper.getObjectProperty(this, prop);
+        return Js.asPropertyMap(this).getAny(prop).asDouble();
     }
 
     /**
@@ -114,7 +112,7 @@ public class JsPlainObj {
      */
     @JsOverlay
     final public boolean getBool(String prop) {
-        return JsHelper.getObjectProperty(this, prop);
+        return Js.asPropertyMap(this).getAny(prop).asBoolean();
     }
 
     /**
@@ -127,7 +125,7 @@ public class JsPlainObj {
      */
     @JsOverlay
     final public String getStr(String prop) {
-        return JsHelper.getObjectProperty(this, prop);
+        return Js.asPropertyMap(this).getAny(prop).asString();
     }
 
     /**
@@ -141,7 +139,7 @@ public class JsPlainObj {
      */
     @JsOverlay
     final public <O> O getObj(String prop) {
-        return JsHelper.getObjectProperty(this, prop);
+        return Js.uncheckedCast(Js.asPropertyMap(this).get(prop));
     }
 
     /**
@@ -153,7 +151,7 @@ public class JsPlainObj {
      */
     @JsOverlay
     final public void set(String prop, int v) {
-        JsHelper.setObjectProperty(this, prop, v);
+	    Js.asPropertyMap(this).set(prop, v);
     }
 
     /**
@@ -165,7 +163,7 @@ public class JsPlainObj {
      */
     @JsOverlay
     final public void set(String prop, double v) {
-        JsHelper.setObjectProperty(this, prop, v);
+	    Js.asPropertyMap(this).set(prop, v);
     }
 
     /**
@@ -177,7 +175,7 @@ public class JsPlainObj {
      */
     @JsOverlay
     final public void set(String prop, boolean v) {
-        JsHelper.setObjectProperty(this, prop, v);
+	    Js.asPropertyMap(this).set(prop, v);
     }
 
     /**
@@ -189,7 +187,7 @@ public class JsPlainObj {
      */
     @JsOverlay
     final public void set(String prop, String v) {
-        JsHelper.setObjectProperty(this, prop, v);
+	    Js.asPropertyMap(this).set(prop, v);
     }
 
     /**
@@ -202,7 +200,7 @@ public class JsPlainObj {
      */
     @JsOverlay
     final public <V> void set(String prop, V v) {
-        JsHelper.setObjectProperty(this, prop, v);
+	    Js.asPropertyMap(this).set(prop, v);
     }
 
     @JsOverlay

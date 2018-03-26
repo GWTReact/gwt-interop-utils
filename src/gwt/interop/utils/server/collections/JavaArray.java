@@ -41,7 +41,7 @@ public class JavaArray<T> implements Array<T> {
     }
 
     @Override
-    public T get(int index) {
+    public T getAt(int index) {
         return internalArray.get(index);
     }
 
@@ -87,7 +87,7 @@ public class JavaArray<T> implements Array<T> {
     }
 
     @Override
-    public void set(int index, T value) {
+    public void setAt(int index, T value) {
         internalArray.set(index, value);
     }
 
@@ -316,7 +316,7 @@ public class JavaArray<T> implements Array<T> {
     @Override
     public <A> A reduceRight(ReduceFn<A, T> fn, A initialValue) {
         for(int i = internalArray.size() - 1; i >=0 ; i--) {
-            initialValue = fn.doReduce(initialValue, get(i));
+            initialValue = fn.doReduce(initialValue, getAt(i));
         }
         return initialValue;
     }
@@ -324,7 +324,7 @@ public class JavaArray<T> implements Array<T> {
     @Override
     public <A> A reduceRight(ReduceFullFn<A, T> fn, A initialValue) {
         for(int i = internalArray.size() - 1; i >=0 ; i--) {
-            initialValue = fn.doReduce(initialValue, get(i), i, this);
+            initialValue = fn.doReduce(initialValue, getAt(i), i, this);
         }
         return initialValue;
     }

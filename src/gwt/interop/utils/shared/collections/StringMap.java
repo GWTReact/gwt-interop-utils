@@ -26,6 +26,8 @@ import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsOverlay;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
+import jsinterop.base.Js;
+import jsinterop.base.JsPropertyMap;
 
 /**
  * An interface for a simple javascript based map that maps a string key to an object
@@ -36,46 +38,7 @@ import jsinterop.annotations.JsType;
  * @param <T> The type of map entry
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name="Object")
-public interface StringMap<T> {
-
-    /**
-     * Return the value with the supplied string key
-     *
-     * @param key The key
-     * @return The value or null if no value is defined for that supplied key
-     */
-    @JsOverlay default T get(String key) {
-        return JsHelper.getObjectProperty(this, key);
-    }
-
-    /**
-     * Set the value for the supplied key
-     *
-     * @param key The key.
-     * @param value The value to set
-     */
-    @JsOverlay default void put(String key, T value) {
-        JsHelper.setObjectProperty(this, key, value);
-    }
-
-    /**
-     * Remove the value with the supplied key
-     *
-     * @param key The key of the value to remove
-     */
-    @JsOverlay default void remove(String key) {
-        JsHelper.removeProperty(this, key);
-    }
-
-    /**
-     * Returns is the supplied key is set in the map
-     *
-     * @param key The key to test
-     * @return <code>true</code> if the key is set
-     */
-    @JsOverlay default boolean hasKey(String key) {
-        return JsHelper.hasProperty(this, key);
-    }
+public interface StringMap<T> extends JsPropertyMap<T> {
 
     /**
      * Returns the keys defined in the map
@@ -83,7 +46,7 @@ public interface StringMap<T> {
      * @return An Array of string keys
      */
     @JsOverlay default Array<String> keys() {
-        return JsHelper.objectProperties(this);
+    	return JsHelper.objectProperties(this);
     }
 
     /**
@@ -100,7 +63,7 @@ public interface StringMap<T> {
      * Removes all entries from this map
      */
     @JsOverlay default void clear() {
-        keys().forEachElem((key) -> remove(key));
+	    Js.asPropertyMap(this).forEach((key) -> delete(key));
     }
 
     /**
@@ -119,7 +82,7 @@ public interface StringMap<T> {
         Array<String> keys = keys();
 
         for(int i = 0; i < keys.getLength(); i++) {
-            String key = keys.get(i);
+            String key = keys.getAt(i);
             forEachFn.forEach(get(key), key, this);
         }
     }
@@ -130,7 +93,7 @@ public interface StringMap<T> {
      * @param toMerge The StringMap to merge with this one
      */
     @JsOverlay default void merge(StringMap<T> toMerge) {
-        toMerge.forEach((value, key, maps) -> put(key, value));
+        toMerge.forEach((value, key, maps) -> set(key, value));
     }
 
     /**

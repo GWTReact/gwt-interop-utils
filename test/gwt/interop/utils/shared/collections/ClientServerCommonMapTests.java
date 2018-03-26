@@ -6,16 +6,16 @@ public class ClientServerCommonMapTests {
         StringMap<String> m1 = StringMapFactory.create();
 
         /* put, get, hasKey */
-        m1.put("V1", "Value1");
+        m1.set("V1", "Value1");
         assert(m1.get("V1").equals("Value1"));
         assert(m1.get("V2") == null);
-        assert(m1.hasKey("V1"));
-        assert(!m1.hasKey("V12"));
+        assert(m1.has("V1"));
+        assert(!m1.has("V12"));
 
         m1 = StringMapFactory.create();
-        m1.put("V1", "Value1");
-        m1.put("V1", "Value1.1");
-        m1.put("V2", "Value2");
+        m1.set("V1", "Value1");
+        m1.set("V1", "Value1.1");
+        m1.set("V2", "Value2");
 
         /* keys */
         Array<String> mapKeys = m1.keys();
@@ -27,14 +27,14 @@ public class ClientServerCommonMapTests {
 
         /* remove */
         m1 = StringMapFactory.create();
-        m1.put("V1", "Value1");
-        m1.put("V2", "Value2");
+        m1.set("V1", "Value1");
+        m1.set("V2", "Value2");
 
         assert(m1.get("V1").equals("Value1"));
-        m1.remove("V1");
+        m1.delete("V1");
         assert(m1.get("V1") == null);
         //Should be no-op
-        m1.remove("V1");
+        m1.delete("V1");
         assert(m1.get("V1") == null);
     }
 

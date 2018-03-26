@@ -11,11 +11,11 @@ public class ClientServerCommonArrayTests {
         a.push("Val1");
         a.push("Val2");
 
-        String v = a.get(0);
+        String v = a.getAt(0);
         assert(v.equals("Val1"));
 
-        a.set(1, "Modified");
-        assert(a.get(1).equals("Modified"));
+        a.setAt(1, "Modified");
+        assert(a.getAt(1).equals("Modified"));
 
         assert(a.getLength() == 2);
 

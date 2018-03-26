@@ -2,6 +2,7 @@ package gwt.interop.utils.server.collections;
 
 import gwt.interop.utils.shared.collections.Array;
 import gwt.interop.utils.shared.collections.StringMap;
+import jsinterop.base.JsPropertyMap;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,6 +15,10 @@ public class JavaStringMap<T> implements StringMap<T> {
     public JavaStringMap() {
         internalMap = new HashMap<>();
     }
+
+	static JsPropertyMap<Object> of() {
+		return new JavaStringMap<>();
+	}
 
     /**
      * Return the value with the supplied string key
@@ -32,7 +37,7 @@ public class JavaStringMap<T> implements StringMap<T> {
      * @param key The key.
      * @param value The value to set
      */
-    public void put(String key, T value) {
+    public void set(String key, T value) {
 
         internalMap.put(key, value);
     }
@@ -42,7 +47,7 @@ public class JavaStringMap<T> implements StringMap<T> {
      *
      * @param key The key of the value to remove
      */
-    public void remove(String key) {
+    public void delete(String key) {
 
         internalMap.remove(key);
     }
@@ -53,7 +58,7 @@ public class JavaStringMap<T> implements StringMap<T> {
      * @param key The key to test
      * @return <code>true</code> if the key is set
      */
-    public boolean hasKey(String key) {
+    public boolean has(String key) {
 
         return internalMap.containsKey(key);
     }
@@ -118,6 +123,6 @@ public class JavaStringMap<T> implements StringMap<T> {
      * @param toMerge The StringMap to merge
      */
     public void merge(StringMap<T> toMerge) {
-        toMerge.forEach((value, key, maps) -> put(key, value));
+        toMerge.forEach((value, key, maps) -> set(key, value));
     }
 }

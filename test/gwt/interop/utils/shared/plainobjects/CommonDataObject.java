@@ -50,8 +50,8 @@ public class CommonDataObject {
 
         o.aMap = StringMapFactory.create();
 
-        o.aMap.put("v1", "A Map Value 1");
-        o.aMap.put("v2", "A Map Value 2");
+        o.aMap.set("v1", "A Map Value 1");
+        o.aMap.set("v2", "A Map Value 2");
 
         o.embeddedObj = new CommonDataObject2();
         o.embeddedObj.field1 = "An embbeded object";

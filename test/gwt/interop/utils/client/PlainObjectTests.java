@@ -88,7 +88,7 @@ public class PlainObjectTests extends GWTTestCase {
         assertEquals(commonObj.booleanObjVal.booleanValue(),true);
         assertEquals(commonObj.stringVal,"A String Value");
         assertEquals(commonObj.aMap.get("v1"), "A Map Value 1");
-        assertEquals(commonObj.anArray.get(1), "ArrayValue2");
+        assertEquals(commonObj.anArray.getAt(1), "ArrayValue2");
 
         //Currently crashes, compiler issue (being fixed)
         //assertEquals(commonObj.convolutedSharedMethod("v2"), "ddd");

@@ -39,7 +39,7 @@ public class JavaLinkedArray<T> implements Array<T> {
     }
 
     @Override
-    public T get(int index) {
+    public T getAt(int index) {
         return internalArray.get(index);
     }
 
@@ -84,7 +84,7 @@ public class JavaLinkedArray<T> implements Array<T> {
     }
 
     @Override
-    public void set(int index, T value) {
+    public void setAt(int index, T value) {
         internalArray.set(index, value);
     }
 

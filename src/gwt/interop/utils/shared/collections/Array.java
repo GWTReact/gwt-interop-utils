@@ -22,10 +22,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE. */
 
 import jsinterop.annotations.*;
+import jsinterop.base.JsArrayLike;
 
-import java.util.List;
 import java.util.stream.Stream;
-import java.util.stream.StreamSupport;
 
 /**
  * An interface to a Javascript array. The implementation may be different on the client
@@ -36,7 +35,7 @@ import java.util.stream.StreamSupport;
  * @param <T> The type of value this array holds
  */
 @JsType(isNative = true, namespace = JsPackage.GLOBAL, name = "Array")
-public interface Array<T> {
+public interface Array<T> extends JsArrayLike<T>{
     /**
      * Returns if an array is not empty or null
      *
@@ -75,17 +74,6 @@ public interface Array<T> {
     Array<T> concatValue(T a);
 
     /**
-     * Gets the object at a given index.
-     *
-     * @param index the index to be retrieved
-     * @return the object at the given index, or <code>null</code> if none exists
-     */
-    @JsOverlay
-    default T get(int index) {
-        return JsArrayHelper.getArrayValue(this, index);
-    }
-
-    /**
      * Convert each element of the array to a String and join them with a comma
      * separator. The value returned from this method may vary between browsers
      * based on how JavaScript values are converted into strings.
@@ -96,22 +84,6 @@ public interface Array<T> {
      * @return The joined string
      */
     String join(String separator);
-
-    /**
-     * Gets the length of the array.
-     *
-     * @return the array length
-     */
-    @JsProperty(name = "length")
-    int getLength();
-
-    /**
-     * Reset the length of the array.
-     *
-     * @param newLength the new length of the array
-     */
-    @JsProperty(name = "length")
-    void setLength(int newLength);
 
     /**
      * Pushes the given value onto the end of the array.
@@ -126,23 +98,6 @@ public interface Array<T> {
      * @param value The value to add to the end of the array
      */
     void push(T ...value);
-
-    /**
-     * Sets the object value at a given index.
-     * <p>
-     * Unlike the native Javascript Array, if the index is out of bounds a NoSuchElementException
-     * will be thrown. This decision was made to simplify emulation
-     *
-     * @param index the index to be set
-     * @param value the object to be stored
-     */
-    @JsOverlay
-    default void set(int index, T value) {
-        if (index >= getLength())
-            throw new IndexOutOfBoundsException();
-
-        JsArrayHelper.setArrayValue(this, index, value);
-    }
 
     /**
      * Shifts the first value off the array.
@@ -415,31 +370,17 @@ public interface Array<T> {
      * Return an Iterable&lt;T&gt; for this Array. This enables Arrays to be the target of
      * target of the "for-each loop" statement
      *
-     * @return An ArrayIterable
+     * @return An Iterable
      */
     @JsOverlay
     public default Iterable<T> asIterable() {
-        return new ArrayIterable<>(this);
+        return asList();
     }
 
 
     @JsOverlay
     public default Stream<T> stream() {
-        return StreamSupport.stream(new ArrayIterable<>(this).spliterator(), false);
-    }
-
-    /**
-     * Returns an adapter class so you can treat this Array as a Java List&lt;T&gt; Any
-     * mutations effected through the List interface will reflect in the underlying
-     * array. Each time you call this method you will receive a new adapter object.
-     * Therefore equality checks between different adapters that wrap the same Array
-     * will fail.
-     *
-     * @return An ArrayListAdapter
-     */
-    @JsOverlay
-    public default List<T> asList() {
-        return new ArrayListAdapter<T>(this);
+        return asList().stream();
     }
 
     /* Functional interfaces */
