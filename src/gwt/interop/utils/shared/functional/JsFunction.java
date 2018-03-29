@@ -2,11 +2,12 @@ package gwt.interop.utils.shared.functional;
 
 
 /**
- * A function that has no arguments and returns R
+ * A function that has one argument T and returns R
  *
- * @param <R> The return type
+ * @param <T> the type of the input to the function
+ * @param <R> the type of the result of the function
  */
 @jsinterop.annotations.JsFunction
-public interface JsFunction<R> {
-    R call();
+public interface JsFunction<T, R> {
+	R apply(T t);
 }
