@@ -11,7 +11,7 @@ You can download the latest release .jar from Maven Central using the following 
 
 * **groupId**&nbsp;&nbsp;&nbsp; com.github.gwtreact
 * **artifactId**&nbsp;&nbsp;gwt-interop-utils
-* **version**&nbsp;&nbsp;&nbsp;  0.4.0
+* **version**&nbsp;&nbsp;&nbsp;  1.0.0
 
 ## Roadmap
 
@@ -25,6 +25,7 @@ Once the project is stable we will be happy to except pull requests. If you find
 
 | Date | Version | Description |
 | :---     | :---  | :---  |
+| 5/02/2018 | 1.0.0 | Update to GWT 2.8.2 and rebase on top of com.google.jsinterop.base As a result, redundant methods have been removed.   |
 | 4/29/2017 | 0.4.0 | Update to GWT 2.8.1   |
 | 3/04/2017 | 0.3.0 | Clean up Eclipse compiler warnings   |
 | 10/27/2016 | 0.2.0 | Update to GWT 2.8   |

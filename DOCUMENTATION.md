@@ -525,11 +525,11 @@ by JsInterop libraries:</p>
 
 | Interface | Description |
 | :---      | :---  |
-| JsProcedure | A callback that takes no arguments and returns nothing
+| JsRunnable | A callback that takes no arguments and returns nothing
 | JsConsumer&lt;A> | A callback that accepts one argument of type A and has no return value
 | JsBiConsumer&lt;A1, A2> |  A callback that accepts two arguments of type A1 and A2 and has no return value
-| JsFunction&lt;R> | A function that has no arguments and returns R
-| JsUnaryFunction&lt;R, A> | A function that has one argument A and returns R
+| JsSupplier&lt;R> | A function that has no arguments and returns R
+| JsFunction&lt;R, A> | A function that has one argument A and returns R
 | JsBiFunction&lt;R, A1, A2> | A function that has two arguments A1, A2 and returns R
 | JsPredicate |  A function that tests some condition and returns true or false
 
